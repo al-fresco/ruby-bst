@@ -9,11 +9,8 @@ class Node
     @right_child = nil
   end
 
-  def <=>(other)
-    if other.is_a?(Node)
-      @data <=> other.data
-    else
-      @data <=> other
+  def <=>(value)
+    @data <=> value
   end
 
   def leaf?

@@ -1,10 +1,15 @@
 require_relative './node.rb'
+require 'pry-byebug'
 
 class Tree
   attr_accessor :root
 
   def initialize(array)
     @root = build_tree(array.uniq.sort)
+  end
+
+  def self.create_random(number_of_nodes = 10)
+    Tree.new(Tree.make_array(number_of_nodes))
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -54,7 +59,7 @@ class Tree
       return node.right if node.left.nil?
       return node.left if node.right.nil?
 
-      successor = smallest_child_of(node.right)
+      successor = smallest_descendant_of(node.right)
       node.data = successor.data
       node.right = delete(successor.data, node.right)
     end
@@ -65,22 +70,30 @@ class Tree
   private
 
   def build_tree(array)
-    mid = array.length / 2
-    root = Node.new(array[mid])
+    middle = array.length / 2
 
-    unless mid == 0
-      root.left = build_tree(array[0..mid - 1])
-      root.right = build_tree(array[mid + 1..-1])
+    node = Node.new(array[middle])
+
+    unless middle == 0
+      node.left = build_tree(array[0..middle - 1])
+      node.right = build_tree(array[middle + 1..array.length - 1])
     end
 
-    root
+    node
   end
 
-  def smallest_child_of(node)
+  def smallest_descendant_of(node)
     if node.left.nil?
       node
     else
-      smallest_child_of(node.left)
+      smallest_descendant_of(node.left)
     end
+  end
+
+  def self.make_array(length, array = [])
+    return array if array.length == length
+    
+    array << rand(100).to_i + 1
+    make_array(length, array.uniq.sort)
   end
 end

@@ -1,12 +1,12 @@
 class Node
-  attr_accessor :data, :left_child, :right_child
+  attr_accessor :data, :left, :right
 
   include Comparable
 
   def initialize(data)
     @data = data
-    @left_child = nil
-    @right_child = nil
+    @left = nil
+    @right = nil
   end
 
   def <=>(other)
@@ -15,13 +15,5 @@ class Node
     else
       @data <=> other
     end
-  end
-
-  def leaf?
-    children.size == 0
-  end
-
-  def children
-    [@left_child, @right_child].compact
   end
 end

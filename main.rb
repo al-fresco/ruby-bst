@@ -1,11 +1,10 @@
 require_relative 'lib/tree.rb'
 
-test_array = Array.new(20).map { |data| data = (rand * 100).to_i }
+arr = Array.new(10).map { |data| data = (rand * 100).to_i }
 
-tree = Tree.new(test_array)
+tree = Tree.new(arr)
 tree.pretty_print
 
-tree.insert(55)
-tree.pretty_print
+tree.delete(gets.chomp.to_i)
 
-p tree.find(55)
+tree.pretty_print

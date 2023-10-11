@@ -9,11 +9,19 @@ class Node
     @right_child = nil
   end
 
-  def <=>(value)
-    @data <=> value
+  def <=>(other)
+    if other.is_a?(Node)
+      @data <=> other.data
+    else
+      @data <=> other
+    end
   end
 
   def leaf?
-    @right_child.nil? && @left_child.nil?
+    children.size == 0
+  end
+
+  def children
+    [@left_child, @right_child].compact
   end
 end

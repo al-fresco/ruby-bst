@@ -24,6 +24,18 @@ module Traversal
     end
   end
 
+  def preorder(node = @root, read = [], &block)
+    read.push(node)
+    read = preorder(node.left, read) unless node.left.nil?
+    read = preorder(node.right, read) unless node.right.nil?
+
+    if block_given?
+      read.each { |node| block.call(node) }
+    else
+      read
+    end
+  end
+
   def inorder(node = @root, read = [], &block)
     read = inorder(node.left, read) unless node.left.nil?
     read.push(node)

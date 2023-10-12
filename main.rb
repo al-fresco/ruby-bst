@@ -23,7 +23,10 @@ puts 'Level Order Traversal:'
 tree.level_order { |node| print "#{node.data} " }
 
 puts "\nPost Order Traversal:"
-tree.postorder.each { |node| print "#{node.data} "}
+tree.postorder.each { |node| print "#{node.data} " }
 
 puts "\nIn Order Traversal:"
 tree.inorder { |node| print "#{node.data} " }
+
+puts "\nPre Order Traversal:"
+tree.preorder { |node| print "#{node.data} " }

@@ -1,7 +1,12 @@
 require_relative './node.rb'
+require_relative './helpers.rb'
 require 'pry-byebug'
 
+include Helpers
+
 class Tree
+  include Helpers
+
   attr_accessor :root
 
   def initialize(array)
@@ -9,13 +14,7 @@ class Tree
   end
 
   def self.create_random(number_of_nodes = 10)
-    Tree.new(Tree.make_array(number_of_nodes))
-  end
-
-  def pretty_print(node = @root, prefix = '', is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+    Tree.new(random_array(number_of_nodes))
   end
 
   def insert(data, node = @root)
@@ -70,14 +69,14 @@ class Tree
   private
 
   def build_tree(array)
-    middle = array.length / 2
+    return nil if array.empty?
+    return Node.new(array.first) if array == 1
 
+    middle = array.length / 2
     node = Node.new(array[middle])
 
-    unless middle == 0
-      node.left = build_tree(array[0..middle - 1])
-      node.right = build_tree(array[middle + 1..array.length - 1])
-    end
+    node.left = build_tree(array.take(middle))
+    node.right = build_tree(array.drop(middle + 1))
 
     node
   end
@@ -88,12 +87,5 @@ class Tree
     else
       smallest_descendant_of(node.left)
     end
-  end
-
-  def self.make_array(length, array = [])
-    return array if array.length == length
-    
-    array << rand(100).to_i + 1
-    make_array(length, array.uniq.sort)
   end
 end

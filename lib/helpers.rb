@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Contains helpful methods to simplify code in Tree class
 module Helpers
   def random_array(length = 10, array = [])

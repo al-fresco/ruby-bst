@@ -1,13 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'lib/tree.rb'
+require_relative 'lib/helpers.rb'
 
-tree = Tree.create_random
+tree = Tree.create_random(20)
 tree.pretty_print
-
-tree.insert(85)
-p tree.find(85)
-
-tree.pretty_print
-
-tree.delete(85)
-
-tree.pretty_print
+p tree.root

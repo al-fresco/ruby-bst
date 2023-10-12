@@ -14,4 +14,12 @@ module Helpers
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def smallest_descendant_of(node)
+    if node.left.nil?
+      node
+    else
+      smallest_descendant_of(node.left)
+    end
+  end
 end

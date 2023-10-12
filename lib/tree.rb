@@ -82,12 +82,4 @@ class Tree
 
     node
   end
-
-  def smallest_descendant_of(node)
-    if node.left.nil?
-      node
-    else
-      smallest_descendant_of(node.left)
-    end
-  end
 end

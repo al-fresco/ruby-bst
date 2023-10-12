@@ -2,12 +2,15 @@
 
 require_relative './node'
 require_relative './helpers'
+require_relative './traversal_methods'
 require 'pry-byebug'
 
 # Creates balanced binary search tree; manipulates and traverses nodes
 class Tree
   extend Helpers::TreeClassMethods
+
   include Helpers::TreeInstanceMethods
+  include Traversal
 
   attr_accessor :root
 
@@ -60,20 +63,6 @@ class Tree
     end
 
     node
-  end
-
-  def level_order(queue = [@root], visited = [], &block)
-    if queue.empty?
-      if block_given?
-        visited.each { |node| block.call(node) }
-      else
-        visited
-      end
-    else
-      node = queue.shift
-
-      level_order(queue.push(node.left, node.right).compact, visited.push(node), &block)
-    end
   end
 
   private

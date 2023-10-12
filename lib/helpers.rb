@@ -1,13 +1,15 @@
-# Adds helper methods to array class
-class Array
-  def median
-    self.length / 2
-  end
-
-  def random(length = 10, array = [])
+# Contains helpful methods to simplify code in Tree class
+module Helpers
+  def random_array(length = 10, array = [])
     return array if array.length == length
     
     array << rand(100).to_i + 1
-    make_array(length, array.uniq.sort)
+    random_array(length, array.uniq.sort)
+  end
+
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 end

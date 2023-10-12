@@ -19,4 +19,7 @@ tree.delete(3)
 tree.pretty_print
 
 # Passes nodes to a block in level order
+puts "Level Order:\n"
 tree.level_order { |node| print "#{node.data} " }
+puts "\nPost Order:\n"
+tree.postorder.each { |node| print "#{node.data} "}

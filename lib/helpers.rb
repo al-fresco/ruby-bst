@@ -24,13 +24,5 @@ module Helpers
       puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
       if node.left then pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) end
     end
-
-    def smallest_descendant_of(node)
-      if node.left.nil?
-        node
-      else
-        smallest_descendant_of(node.left)
-      end
-    end
   end
 end

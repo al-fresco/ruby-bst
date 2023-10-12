@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# Represents a node in the tree; stores a value and references to its children
 class Node
-  attr_accessor :data, :left, :right
-
   include Comparable
+  
+  attr_accessor :data, :left, :right
 
   def initialize(data)
     @data = data

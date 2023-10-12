@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative './node.rb'
-require_relative './helpers.rb'
+require_relative './node'
+require_relative './helpers'
 require 'pry-byebug'
 
-include Helpers
-
+# Creates balanced binary search tree; manipulates and traverses nodes
 class Tree
-  include Helpers
+  extend Helpers::TreeClassMethods
+  include Helpers::TreeInstanceMethods
 
   attr_accessor :root
 
@@ -20,22 +20,16 @@ class Tree
   end
 
   def insert(data, node = @root)
-    if node == data
-      puts "Data already exists within the tree."
-    elsif node > data
-      if node.left.nil?
-        node.left = Node.new(data)
-      else
-        insert(data, node.left)
-      end
+    if node > data
+      return node.left = Node.new(data) if node.left.nil?
+
+      insert(data, node.left)
     elsif node < data
-      if node.right.nil?
-        node.right = Node.new(data)
-      else
-        insert(data, node.right)
-      end
+      return node.right = Node.new(data) if node.right.nil?
+
+      insert(data, node.right)
     else
-      puts "This data cannot be inserted."
+      puts 'This data cannot be inserted.'
     end
   end
 
@@ -47,7 +41,7 @@ class Tree
     elsif node == data
       node
     else
-      puts "Data does not exist within the tree."
+      puts 'Data does not exist within the tree.'
     end
   end
 
@@ -64,7 +58,7 @@ class Tree
       node.data = successor.data
       node.right = delete(successor.data, node.right)
     end
-    
+
     node
   end
 

@@ -10,6 +10,10 @@ module Helpers
       array << rand(100).to_i + 1
       random_array(length, array.uniq.sort)
     end
+
+    def create_random(number_of_nodes = 10)
+      self.new(random_array(number_of_nodes))
+    end
   end
 
   # Consists of methods usable by instances of the Tree class (generally to perform smaller

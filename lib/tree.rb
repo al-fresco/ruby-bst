@@ -18,10 +18,6 @@ class Tree
     @root = build_tree(array.uniq.sort)
   end
 
-  def self.create_random(number_of_nodes = 10)
-    Tree.new(random_array(number_of_nodes))
-  end
-
   def insert(data, node = @root)
     if node > data
       return node.left = Node.new(data) if node.left.nil?

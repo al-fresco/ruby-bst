@@ -61,7 +61,10 @@ class Tree
     node
   end
 
-  def height_of(target, node = @root)
+  def height_of(target)
+    deepest_descendant = level_order([target]).last
+
+    depth_of(deepest_descendant, target)
   end
 
   def depth_of(target, node = @root, depth = 0)

@@ -2,14 +2,6 @@
 
 # Contains several types of traversal methods for Tree objects
 module Traversal
-  def smallest_descendant_of(node)
-    if node.left.nil?
-      node
-    else
-      smallest_descendant_of(node.left)
-    end
-  end
-
   def level_order(queue = [@root], read = [], &block)
     if queue.compact.empty?
       return block_given? ? nil : read

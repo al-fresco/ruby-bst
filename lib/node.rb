@@ -19,4 +19,8 @@ class Node
       @data <=> other
     end
   end
+
+  def leaf?
+    @left.nil? && @right.nil?
+  end
 end

@@ -31,4 +31,5 @@ tree.inorder { |node| print "#{node.data} " }
 puts "\nPre Order Traversal:"
 tree.preorder { |node| print "#{node.data} " }
 
-tree.depth_of(gets.chomp.to_i)
+p tree.depth_of(gets.chomp.to_i)
+p tree.height_of(tree.find(gets.chomp.to_i))

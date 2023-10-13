@@ -61,13 +61,27 @@ class Tree
     node
   end
 
-  def height_of(target)
-    deepest_descendant = level_order([target]).last
+  def height_of(node)
+    return nil if node.nil?
+    return 0 if node.leaf?
+    
+    if node.children.length < 2
+      height_of(node.children.first) + 1
+    else
+      left_height = height_of(node.left)
+      right_height = height_of(node.right)
 
-    depth_of(deepest_descendant, target)
+      if left_height >= right_height
+        left_height + 1
+      else
+        right_height + 1
+      end
+    end
   end
 
   def depth_of(target, node = @root, depth = 0)
+    return nil if target.nil? || node.nil?
+
     if node < target
       depth_of(target, node.right, depth + 1)
     elsif node > target

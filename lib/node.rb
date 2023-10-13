@@ -21,6 +21,10 @@ class Node
   end
 
   def leaf?
-    @left.nil? && @right.nil?
+    children.empty?
+  end
+
+  def children
+    [@left, @right].compact
   end
 end

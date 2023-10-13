@@ -4,11 +4,10 @@
 module Traversal
   def level_order(queue = [@root], read = [], &block)
     if queue.compact.empty?
-      return block_given? ? nil : read
+      return block_given? ? read.each { |node| block.call(node) } : read
     end
 
     node = queue.shift
-    block.call(node) if block_given?
     
     queue << node.left
     queue << node.right

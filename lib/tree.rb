@@ -61,11 +61,24 @@ class Tree
     node
   end
 
+  def height_of(target, node = @root)
+  end
+
+  def depth_of(target, node = @root, depth = 0)
+    if node < target
+      depth_of(target, node.right, depth + 1)
+    elsif node > target
+      depth_of(target, node.left, depth + 1)
+    else
+      depth
+    end
+  end
+
   private
 
   def build_tree(array)
     return nil if array.empty?
-    return Node.new(array.first) if array == 1
+    return Node.new(array.first) if array.length == 1
 
     middle = array.length / 2
     node = Node.new(array[middle])

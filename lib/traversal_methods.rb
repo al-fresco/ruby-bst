@@ -11,17 +11,17 @@ module Traversal
   end
 
   def level_order(queue = [@root], read = [], &block)
-    if queue.empty?
-      if block_given?
-        read.each { |node| block.call(node) }
-      else
-        read
-      end
-    else
-      node = queue.shift
-
-      level_order(queue.push(node.left, node.right).compact, read.push(node), &block)
+    if queue.compact.empty?
+      return block_given? ? nil : read
     end
+
+    node = queue.shift
+    block.call(node) if block_given?
+    
+    queue << node.left
+    queue << node.right
+
+    level_order(queue.compact, read.push(node), &block)
   end
 
   def preorder(node = @root, read = [], &block)

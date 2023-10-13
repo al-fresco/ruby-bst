@@ -92,8 +92,6 @@ class Tree
   end
 
   def balanced?(node = @root)
-    # returns true if the height difference between the node's child is no greater than 1, and false if it is
-    # do not check the balance of non-existent nodes
     return true if node.leaf?
 
     unless node.children.length < 2
@@ -107,9 +105,9 @@ class Tree
 
   def rebalance
     node_values = []
-    level_order { |node| node_values << node.data }
+    preorder { |node| node_values << node.data }
 
-    build_tree(node_values.uniq.sort)
+    @root = build_tree(node_values.sort)
   end
 
   private

@@ -70,6 +70,8 @@ tree.insert(insertions.pop) until insertions.empty?
 tree.pretty_print
 puts "Balanced: #{tree.balanced?}"
 
-# Rebuilds tree from an array of its nodes to balance it; prints tree
+# Rebuilds tree from an array of its nodes to balance it; checks balance (should always return true);
+# prints tree
 tree.rebalance
+puts "Balanced: #{tree.balanced?}"
 tree.pretty_print

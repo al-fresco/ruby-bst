@@ -7,9 +7,9 @@ require 'pry-byebug'
 
 # Creates balanced binary search tree; manipulates and traverses nodes
 class Tree
-  extend Helpers::TreeClassMethods
+  extend TreeClassMethods
 
-  include Helpers::TreeInstanceMethods
+  include TreeInstanceMethods
   include Traversal
 
   attr_accessor :root
@@ -103,6 +103,13 @@ class Tree
     else
       height_of(node.children.first) <= 1
     end
+  end
+
+  def rebalance
+    node_values = []
+    level_order { |node| node_values << node.data }
+
+    build_tree(node_values.uniq.sort)
   end
 
   private
